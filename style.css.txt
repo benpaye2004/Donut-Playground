@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #2b1e1e, #0f0a0a);
+  font-family: 'Poppins', sans-serif;
+}
+
+#playground {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
