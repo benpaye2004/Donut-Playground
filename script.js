@@ -240,3 +240,28 @@ class Donut {
         const dist = rand(this.radius * 0.3, this.radius * 0.9);
         ctx.beginPath();
         ctx.arc(Math.cos(angle) * dist, Math.sin(angle) * dist, rand(1.2, 2.4), 0, Math.PI *
+
+/* ---------------------------------------------------------
+   INTRO / BEGIN BUTTON
+--------------------------------------------------------- */
+
+function hideIntro() {
+  if (introOverlay) {
+    introOverlay.style.transition = "opacity 0.6s ease";
+    introOverlay.style.opacity = "0";
+    setTimeout(() => {
+      introOverlay.style.display = "none";
+    }, 600);
+  }
+  // Start ambience if sound is enabled
+  if (soundEnabled && currentAmbience) {
+    currentAmbience.volume = 0.6;
+    currentAmbience.play().catch(() => {});
+  }
+}
+
+if (beginBtn) {
+  beginBtn.addEventListener("click", () => {
+    hideIntro();
+  });
+}
