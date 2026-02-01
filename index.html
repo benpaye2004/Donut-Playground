@@ -2,48 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Donut Playground 2.0 – Espresso & Gold</title>
+  <title>Asili Donut Playground 3.0 – Zen Mode</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-inner">
+      <div class="loading-logo">
+        <div class="donut-ring">
+          <div class="donut-inner"></div>
+        </div>
+        <div class="logo-mark">ASILI</div>
+        <div class="logo-sub">Mini Donut Café</div>
+      </div>
+      <div class="loading-text">Preparing your donut universe…</div>
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+
+  <!-- UI -->
   <div id="ui">
-    <div class="logo">Asili Donut Playground 2.0</div>
+    <div class="brand-bar">
+      <div class="brand-left">
+        <div class="brand-logo-mark">Asili Donut Playground</div>
+        <div class="brand-tagline">Zen Mode · Espresso & Gold</div>
+      </div>
+      <div class="brand-right">
+        <span class="brand-badge">Powered by Asili</span>
+      </div>
+    </div>
+
     <div class="controls">
       <div class="control-group">
+        <label>Zen Flow</label>
+        <button id="zen-toggle" class="toggle active">On</button>
+      </div>
+      <div class="control-group">
         <label>Gravity</label>
-        <button id="gravity-toggle" class="toggle active">On</button>
+        <button id="gravity-toggle" class="toggle active">Soft</button>
       </div>
       <div class="control-group">
         <label>Sound</label>
         <button id="sound-toggle" class="toggle active">On</button>
       </div>
       <div class="control-group">
-        <label>Theme</label>
-        <select id="theme-select">
-          <option value="espresso" selected>Espresso + Gold</option>
+        <label>Atmosphere</label>
+        <select id="ambience-select">
+          <option value="cafe" selected>Café Glow</option>
+          <option value="night">Late Night</option>
+          <option value="sunrise">Sunrise Brew</option>
         </select>
       </div>
       <div class="control-group">
-        <label>Actions</label>
-        <button id="reset-btn" class="action">Reset Donuts</button>
+        <label>World</label>
+        <button id="reset-btn" class="action">Refresh Donuts</button>
       </div>
       <div class="hint">
-        Tap / click to spawn donuts • Swipe to push • Pinch to scatter
+        Tap to invite donuts · Swipe to guide them · Pinch to release a sprinkle burst
+      </div>
+    </div>
+
+    <!-- Intro overlay -->
+    <div id="intro-overlay">
+      <div class="intro-card">
+        <div class="intro-title">Welcome to the Asili Donut Playground</div>
+        <div class="intro-subtitle">A quiet corner of the universe where donuts drift, glow, and breathe with you.</div>
+        <button id="begin-btn" class="intro-button">Tap to Begin</button>
       </div>
     </div>
   </div>
 
+  <!-- Canvas -->
   <canvas id="playground"></canvas>
 
-  <!-- Audio (you can replace these with your own .mp3 files) -->
-  <audio id="ambient-audio" loop>
+  <!-- Audio (replace with your own files if you like) -->
+  <audio id="ambient-cafe" loop>
     <source src="ambient-cafe.mp3" type="audio/mpeg" />
   </audio>
-  <audio id="tap-audio">
+  <audio id="ambient-night" loop>
+    <source src="ambient-night.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="ambient-sunrise" loop>
+    <source src="ambient-sunrise.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="tap-sound">
     <source src="tap.mp3" type="audio/mpeg" />
   </audio>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  <audio id="sprinkle-sound">
