@@ -78,4 +78,5 @@ canvas.addEventListener("click", (e) => {
       setTimeout(() => donut.glow = 15, 300);
     }
   });
+
 });
