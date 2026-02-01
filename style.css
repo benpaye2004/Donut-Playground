@@ -1,22 +1,27 @@
+/* ---------------------------------------------------------
+   ASILI DONUT PLAYGROUND 3.0 — ZEN MODE
+   Espresso + Gold Theme
+--------------------------------------------------------- */
+
 :root {
-  /* Espresso + Gold theme */
-  --bg-dark: #1b1412;
-  --bg-mid: #3b2f2f;
-  --accent-gold: #c6a667;
-  --accent-gold-soft: rgba(198, 166, 103, 0.4);
-  --text-main: #f5eee5;
-  --text-muted: #b9a89a;
+  --espresso-dark: #1b1412;
+  --espresso-mid: #3b2f2f;
+  --gold: #c6a667;
+  --gold-soft: rgba(198, 166, 103, 0.4);
+  --cream: #f5eee5;
+  --cream-muted: #b9a89a;
   --panel-bg: rgba(18, 12, 10, 0.88);
   --panel-border: rgba(198, 166, 103, 0.5);
   --button-bg: rgba(59, 47, 47, 0.9);
   --button-bg-active: rgba(198, 166, 103, 0.18);
   --button-border: rgba(198, 166, 103, 0.7);
-  --button-text: #f5eee5;
-  --button-text-muted: #b9a89a;
   --shadow-strong: 0 0 25px rgba(198, 166, 103, 0.45);
   --radius-soft: 14px;
+  --transition-fast: 0.18s ease;
+  --transition-slow: 0.6s ease;
 }
 
+/* RESET */
 *,
 *::before,
 *::after {
@@ -26,30 +31,180 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-  color: var(--text-main);
-  background: radial-gradient(circle at top, var(--bg-mid), var(--bg-dark));
+  font-family: "Poppins", system-ui, sans-serif;
+  background: radial-gradient(circle at top, var(--espresso-mid), var(--espresso-dark));
+  color: var(--cream);
 }
 
-/* Canvas */
+/* ---------------------------------------------------------
+   LOADING SCREEN
+--------------------------------------------------------- */
 
-#playground {
+#loading-screen {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;
+  background: radial-gradient(circle at center, var(--espresso-mid), var(--espresso-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 2.8s;
 }
 
-/* UI Panel */
+.loading-inner {
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.loading-logo {
+  margin-bottom: 1rem;
+}
+
+.donut-ring {
+  width: 90px;
+  height: 90px;
+  border: 10px solid var(--gold);
+  border-radius: 50%;
+  margin: 0 auto 0.5rem;
+  position: relative;
+  animation: spin 2.6s linear infinite;
+}
+
+.donut-inner {
+  width: 30px;
+  height: 30px;
+  background: var(--espresso-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-mark {
+  font-size: 1.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+
+.logo-sub {
+  font-size: 0.9rem;
+  color: var(--cream-muted);
+}
+
+.loading-text {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--cream-muted);
+}
+
+.loading-spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--gold-soft);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  margin: 1rem auto 0;
+  animation: spin 1.2s linear infinite;
+}
+
+/* ---------------------------------------------------------
+   INTRO OVERLAY
+--------------------------------------------------------- */
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 10, 10, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  opacity: 0;
+  animation: introFadeIn 1.2s ease forwards;
+  animation-delay: 3.2s;
+}
+
+.intro-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  padding: 2rem 2.4rem;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: var(--shadow-strong);
+  max-width: 420px;
+}
+
+.intro-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--gold);
+}
+
+.intro-subtitle {
+  font-size: 0.9rem;
+  color: var(--cream-muted);
+  margin-bottom: 1.4rem;
+}
+
+.intro-button {
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-soft);
+  color: var(--cream);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.intro-button:hover {
+  background: var(--button-bg-active);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ---------------------------------------------------------
+   UI PANEL
+--------------------------------------------------------- */
 
 #ui {
   position: fixed;
-  top: 1.5rem;
+  top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 500;
   pointer-events: none;
+}
+
+.brand-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: auto;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 0.5rem;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+}
+
+.brand-logo-mark {
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+}
+
+.brand-tagline {
+  font-size: 0.7rem;
+  color: var(--cream-muted);
+}
+
+.brand-badge {
+  font-size: 0.7rem;
+  color: var(--gold);
 }
 
 .controls {
@@ -67,17 +222,6 @@ body {
   max-width: 960px;
 }
 
-.logo {
-  flex: 1 1 100%;
-  font-size: 0.9rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  border-bottom: 1px solid rgba(198, 166, 103, 0.25);
-  padding-bottom: 0.35rem;
-  margin-bottom: 0.35rem;
-}
-
 .control-group {
   display: flex;
   flex-direction: column;
@@ -89,7 +233,7 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--text-muted);
+  color: var(--cream-muted);
 }
 
 .toggle,
@@ -97,64 +241,89 @@ body {
   border-radius: var(--radius-soft);
   border: 1px solid var(--button-border);
   background: var(--button-bg);
-  color: var(--button-text);
+  color: var(--cream);
   padding: 0.35rem 0.8rem;
   font-size: 0.8rem;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.12s ease,
-    box-shadow 0.18s ease;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: var(--transition-fast);
 }
 
 .toggle.active,
 .action:hover {
   background: var(--button-bg-active);
   box-shadow: var(--shadow-strong);
-  transform: translateY(-1px);
 }
 
 .toggle.inactive {
-  color: var(--button-text-muted);
+  color: var(--cream-muted);
   border-color: rgba(198, 166, 103, 0.25);
 }
 
-#theme-select {
+#ambience-select {
   border-radius: var(--radius-soft);
   border: 1px solid var(--button-border);
   background: var(--button-bg);
-  color: var(--button-text);
+  color: var(--cream);
   padding: 0.35rem 0.6rem;
   font-size: 0.8rem;
-  outline: none;
   cursor: pointer;
-}
-
-#theme-select:focus {
-  box-shadow: var(--shadow-strong);
 }
 
 .hint {
   flex: 1 1 100%;
   font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-top: 0.1rem;
+  color: var(--cream-muted);
 }
 
-/* Mobile */
+/* ---------------------------------------------------------
+   CANVAS
+--------------------------------------------------------- */
+
+#playground {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   ANIMATIONS
+--------------------------------------------------------- */
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes introFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
 
 @media (max-width: 720px) {
   #ui {
     top: auto;
     bottom: 0.75rem;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
     padding: 0 0.75rem;
   }
@@ -165,8 +334,8 @@ body {
     gap: 0.5rem 0.75rem;
   }
 
-  .logo {
-    font-size: 0.75rem;
+  .brand-bar {
+    display: none;
   }
 
   .control-group {
